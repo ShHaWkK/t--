@@ -8,6 +8,8 @@ import hashlib
 from fastapi.exceptions import HTTPException
 from jinja2 import Template
 import ipaddress
+import os
+import subprocess
 
 app = FastAPI()
 r = redis.Redis(host='192.168.1.104', port=6379, password='Superman5!', db=0, decode_responses=True)
@@ -101,18 +103,6 @@ def generate_signed_url(player_id, expiration=300):
     signature = hashlib.sha256(f"{player_id}{timestamp}{SECRET_KEY}".encode()).hexdigest()
     return f"https://player.mondomaine.com/embed/{player_id}?expires={timestamp}&signature={signature}"
 
-@app.get("/embed/{player_id}")
-async def embed_player(player_id: str, request: Request):
-    player_config = r.get(f"player:{player_id}")
-    if not player_config:
-        raise HTTPException(status_code=404, detail="Player expired or not found")
-    player_config = eval(player_config)
-    allowed_domains = player_config.get("allowed_domains", [])
-    referer = request.headers.get("referer", "")
-    if allowed_domains and not any(domain in referer for domain in allowed_domains):
-        raise HTTPException(status_code=403, detail="This player cannot be embedded on this domain")
-    return JSONResponse({"player_config": player_config})
-
 @app.get("/list-players/")
 async def list_players():
     keys = r.keys("player:*")
@@ -125,3 +115,12 @@ async def delete_player(player_id: str):
     if deleted:
         return JSONResponse({"message": "Player deleted successfully"})
     raise HTTPException(status_code=404, detail="Player not found")
+
+# Automatisation d'installation des dépendances
+def install_dependencies():
+    subprocess.run(["pip", "install", "-r", "requirements.txt"], check=True)
+
+if __name__ == "__main__":
+    install_dependencies()
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
