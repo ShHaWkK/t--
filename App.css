@@ -1,0 +1,130 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #4e54c8, #001b38) fixed;
+  color: white;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  width: 450px;
+  backdrop-filter: blur(15px);
+}
+
+.title {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.input, .select {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 18px;
+  color: #ffffff;
+  transition: background 0.3s ease;
+}
+
+.input:focus, .select:focus {
+  background: rgba(255, 255, 255, 0.3);
+  color: #333;
+  outline: none;
+}
+.form-group.inline {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-group.inline input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: background 0.3s ease, border 0.3s ease;
+  margin-right: 10px;
+}
+
+.form-group.inline input[type="checkbox"]:checked {
+  background: #ff6f61;
+  border: 2px solid #ff6f61;
+}
+
+.form-group.inline input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+.form-group.inline label {
+  font-size: 16px;
+  color: #ffffff;
+  user-select: none;
+  cursor: pointer;
+}
+
+.button {
+  background: #ff6f61;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background: #ff5a4a;
+}
+
+.allowed-domains {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.allowed-domain {
+  background: rgba(95, 247, 6, 0.8);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  color: #000000;
+  display: flex;
+  align-items: center;
+}
+
+.allowed-domain button {
+  background: none;
+  border: none;
+  color: #ff6f61;
+  font-size: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.allowed-domain button:hover {
+  color: #ff5a4a;
+}
